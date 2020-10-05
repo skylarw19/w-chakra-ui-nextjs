@@ -6,19 +6,54 @@ import {
   List,
   ListIcon,
   ListItem,
+  Input,
+  FormControl,
+  Button
 } from '@chakra-ui/core'
 
-import { Hero } from '../components/Hero'
+import React, {useState} from 'react'
+import { useRouter } from 'next/router'
 import { Container } from '../components/Container'
-import { Main } from '../components/Main'
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
-import { CTA } from '../components/CTA'
-import { Footer } from '../components/Footer'
 
-const Index = () => (
-  <Container>
-    <Hero />
+const Index = () => {
+  const router = useRouter();
+  const [inputText, setInputText] = useState("")
+
+  //handle form functions
+  const handleChange = e => setInputText(e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputText)
+    router.push({
+      pathname: '/api/search',
+      query: {inputText}
+    })
+  }  
+
+  return(
+    <Container>
+
+      <form onSubmit={handleSubmit}>
+        <Input 
+          value={inputText}
+          onChange={handleChange}
+          placeholder="search for a show"
+        />
+        <Button type="submit">Search</Button>
+      </form>
+
+    </Container>
+  )
+}
+
+export default Index
+
+
+
+
+    {/* <Hero />
     <Main>
+      
       <Text>
         Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>.
       </Text>
@@ -48,8 +83,4 @@ const Index = () => (
     <Footer>
       <Text>Next ❤️ Chakra</Text>
     </Footer>
-    <CTA />
-  </Container>
-)
-
-export default Index
+    <CTA /> */}
