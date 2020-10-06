@@ -47,12 +47,12 @@ const Index = () => {
       :
       <>
         {results.map(result =>
-          <Box bg="tomato" rounded="lg" m="10px">
+          <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px">
             <Flex>
-                 <Image src={result.image} h="150px" w="auto" margin="5px"/>
+                 <Image d="flex" src={result.image} h="150px" w="auto" m="5px" />
                  <Box>
                    <Flex>
-                    <Text m="1">{result.seriesName} </Text>
+                    <Text m="1" >{result.seriesName} </Text>
                     <Badge 
                       rounded="full" 
                       variantColor="teal" 
