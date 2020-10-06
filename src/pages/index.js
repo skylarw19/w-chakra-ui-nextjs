@@ -4,7 +4,8 @@ import {
   Box,
   Text,
   Image,
-  Flex
+  Flex,
+  Badge
 } from '@chakra-ui/core'
 
 import React, {useState} from 'react'
@@ -44,14 +45,30 @@ const Index = () => {
       :
       <>
         {results.map(result =>
-          <Box margin="10px" bg="tomato">
+          // <Flex margin="10px" bg="tomato" rounded="lg">
+       
+          //     <Image src={result.image} h="150px" w="auto" margin="5px"/>
+          //     <Box d="flex">
+          //       <Text>{result.seriesName} </Text>
+          //       <Badge variantColor="teal">{result.network} </Badge>
+          //     </Box>
+              
+          //     <Flex direction="column" margin="5px">
+          //       <Text>{result.overview} </Text>
+          //     </Flex>
+
+        
+          // </Flex>
+          <Box bg="tomato" rounded="lg" m="10px">
             <Flex>
-              <Image src={result.image} height="150px" width="auto" />
-              <Flex direction="column">
-                <Text>{result.seriesName} </Text>
-                <Text>{result.network} </Text>
-                <Text>{result.overview} </Text>
-              </Flex>
+                 <Image src={result.image} h="150px" w="auto" margin="5px"/>
+                 <Box>
+                   <Flex>
+                    <Text>{result.seriesName} </Text>
+                    <Badge variantColor="teal">{result.network} </Badge>
+                   </Flex>
+                  <Text>{result.overview}</Text>
+                 </Box>
             </Flex>
           </Box>
         )}
