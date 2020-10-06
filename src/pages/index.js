@@ -42,11 +42,23 @@ const Index = () => {
 
       {/* why is result state not mapping anything out? 
       inputText state displays each time it changes, so results should too? */}
-      {results.map(result => {
+      {/* {results.map(result => {
         <Box>
           <Text> {result.seriesName} </Text>
         </Box>
-      })}
+      })} */}
+
+      {results.length ?
+      <>
+        {results.map(result =>
+          <Box>
+            <Text>{result.seriesName} </Text>
+          </Box>
+        )}
+      </>
+      :
+      <p>No shows found</p>
+      }
 
     </Container>
   )
