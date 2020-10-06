@@ -1,38 +1,29 @@
 import {
   Link as ChakraLink,
-  Text,
-  Code,
-  Icon,
-  List,
-  ListIcon,
-  ListItem,
   Input,
-  FormControl,
   Button
 } from '@chakra-ui/core'
 
 import React, {useState} from 'react'
-import { useRouter } from 'next/router'
 import { Container } from '../components/Container'
 
 const Index = () => {
-  const router = useRouter();
+  
   const [inputText, setInputText] = useState("")
+  const [results, setResults] = useState()
 
   //handle form functions
   const handleChange = e => setInputText(e.target.value);
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputText)
-    router.push({
-      pathname: '/api/search',
-      query: {inputText}
-    })
+    const apiResult = await fetch(`/api/search?q=${inputText}`)
+    setResults(apiResult);
+    console.log(results.shows)
   }  
 
   return(
     <Container>
-
       <form onSubmit={handleSubmit}>
         <Input 
           value={inputText}
@@ -41,7 +32,6 @@ const Index = () => {
         />
         <Button type="submit">Search</Button>
       </form>
-
     </Container>
   )
 }

@@ -1,30 +1,22 @@
-export default (req, res) => {
-    const { query: {inputText}} = req;  //is this even needed if i have req.query?
-    res.status(200).json({inputText: req.query})
+export default (req,res) => {
+    const results = fetch(`http://104.131.65.216:3000/api/search/${req.query.q}`)
 
+    const showsWithServicePlans = results.showsWithServicePlans;  //is results not giving me a json obj?
+    let shows = [];
+    showsWithServicePlans.forEach(el => {  //cannot read property forEach of undefined. 
+        let show = {
+            seriesName: el.seriesName,
+            overview: el.overview,
+            image: el.image,
+            network: el.network,
+            servicePlans: el.servicePlans
+        };
+        shows.push(show);
+    })
+
+    return res.json({shows: shows})
 }
-// import getShows from '../../services/getShows'
 
-// export default async (req,res) => {
-//     const result = await getShows(req.query);
-//     res.status(200).json(result)
-// }
 
-// export default function getShows(inputText){
-//     const res = await fetch(`${process.env.apiurl}/${inputText}`);
-//     const shows = await res.json();
-//     shows.map((show) => {
-//         return(
-//             <p>show.seriesName</p>
-//         )
-//     })
-// }
 
-// export default async (req, res) => {
-//     // const inputText = req.body; 
-//     const result = await fetch(`${process.env.apiurl}${inputText}`);
-//     // console.log(result)
-//     res.status(200).json({ text: req})
-//     // const shows = result.shows
-//     // res.status(200).json({ text: shows })
-// }
+
