@@ -1,5 +1,5 @@
 export default async (req,res) => {
-    const results = await fetch(`http://104.131.65.216:3000/api/search/${req.query.q}`)
+    const results = await fetch(`${process.env.apiurl}/${req.query.q}`)
     const data = await results.json()  //.json() is async
 
     let shows = [];
@@ -15,7 +15,7 @@ export default async (req,res) => {
         shows.push(show);
     })
 
-    return res.json({shows: shows})
+    return res.json({shows})
 }
 
 

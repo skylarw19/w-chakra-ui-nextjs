@@ -1,26 +1,32 @@
 import {
-  Link as ChakraLink,
   Input,
-  Button
+  Button,
+  Box,
+  Text
 } from '@chakra-ui/core'
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Container } from '../components/Container'
 
 const Index = () => {
   
   const [inputText, setInputText] = useState("")
-  const [results, setResults] = useState()
+  const [results, setResults] = useState([])
 
   //handle form functions
-  const handleChange = e => setInputText(e.target.value);
+  const handleChange = e => {setInputText(e.target.value)}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const apiResult = await fetch(`/api/search?q=${inputText}`)
-    setResults(apiResult);
-    // console.log(results.shows)
+    const data = await apiResult.json();
+    
+    setResults(data.shows);
+
+    console.log(results)
   }  
+
+  
 
   return(
     <Container>
@@ -32,6 +38,16 @@ const Index = () => {
         />
         <Button type="submit">Search</Button>
       </form>
+      <p>{inputText} </p>
+
+      {/* why is result state not mapping anything out? 
+      inputText state displays each time it changes, so results should too? */}
+      {results.map(result => {
+        <Box>
+          <Text> {result.seriesName} </Text>
+        </Box>
+      })}
+
     </Container>
   )
 }
