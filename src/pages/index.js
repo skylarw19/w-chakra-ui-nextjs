@@ -19,7 +19,7 @@ const Index = () => {
     e.preventDefault();
     const apiResult = await fetch(`/api/search?q=${inputText}`)
     setResults(apiResult);
-    console.log(results.shows)
+    // console.log(results.shows)
   }  
 
   return(
