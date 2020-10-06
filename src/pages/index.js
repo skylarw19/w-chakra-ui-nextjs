@@ -32,12 +32,14 @@ const Index = () => {
   return(
     <Container>
       <form onSubmit={handleSubmit}>
-        <Input 
-          value={inputText}
-          onChange={handleChange}
-          placeholder="search for a show"
-        />
-        <Button type="submit">Search</Button>
+        <Flex m="10px">
+          <Input m="10px"
+            value={inputText}
+            onChange={handleChange}
+            placeholder="search for a show"
+          />
+          <Button type="submit" variantColor="teal" m="10px">Search</Button>
+        </Flex>
       </form>
 
       {search && !results.length ?
@@ -45,29 +47,36 @@ const Index = () => {
       :
       <>
         {results.map(result =>
-          // <Flex margin="10px" bg="tomato" rounded="lg">
-       
-          //     <Image src={result.image} h="150px" w="auto" margin="5px"/>
-          //     <Box d="flex">
-          //       <Text>{result.seriesName} </Text>
-          //       <Badge variantColor="teal">{result.network} </Badge>
-          //     </Box>
-              
-          //     <Flex direction="column" margin="5px">
-          //       <Text>{result.overview} </Text>
-          //     </Flex>
-
-        
-          // </Flex>
           <Box bg="tomato" rounded="lg" m="10px">
             <Flex>
                  <Image src={result.image} h="150px" w="auto" margin="5px"/>
                  <Box>
                    <Flex>
-                    <Text>{result.seriesName} </Text>
-                    <Badge variantColor="teal">{result.network} </Badge>
+                    <Text m="1">{result.seriesName} </Text>
+                    <Badge 
+                      rounded="full" 
+                      variantColor="teal" 
+                      textTransform="uppercase"
+                      m="1"
+                      p="1"
+                    >
+                      {result.network} 
+                    </Badge>
                    </Flex>
-                  <Text>{result.overview}</Text>
+                  <Text m="1">{result.overview}</Text>
+                  <Flex wrap="wrap">
+                    {result.servicePlans.map(servicePlan =>
+                      <Badge 
+                        rounded="full" 
+                        variantColor="teal" 
+                        textTransform="uppercase"
+                        m="1"
+                        p="1"
+                      > 
+                        {servicePlan.name} 
+                      </Badge>  
+                    )}
+                  </Flex>
                  </Box>
             </Flex>
           </Box>
