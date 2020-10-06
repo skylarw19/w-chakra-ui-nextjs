@@ -2,16 +2,19 @@ import {
   Input,
   Button,
   Box,
-  Text
+  Text,
+  Image,
+  Flex
 } from '@chakra-ui/core'
 
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { Container } from '../components/Container'
 
 const Index = () => {
   
   const [inputText, setInputText] = useState("")
   const [results, setResults] = useState([])
+  const [search, setSearch] = useState(false)
 
   //handle form functions
   const handleChange = e => {setInputText(e.target.value)}
@@ -20,13 +23,10 @@ const Index = () => {
     e.preventDefault();
     const apiResult = await fetch(`/api/search?q=${inputText}`)
     const data = await apiResult.json();
-    
     setResults(data.shows);
-
-    console.log(results)
+    setSearch(true)
+    console.log(data.shows)
   }  
-
-  
 
   return(
     <Container>
@@ -38,26 +38,24 @@ const Index = () => {
         />
         <Button type="submit">Search</Button>
       </form>
-      <p>{inputText} </p>
 
-      {/* why is result state not mapping anything out? 
-      inputText state displays each time it changes, so results should too? */}
-      {/* {results.map(result => {
-        <Box>
-          <Text> {result.seriesName} </Text>
-        </Box>
-      })} */}
-
-      {results.length ?
+      {search && !results.length ?
+        <Text>No shows found</Text>
+      :
       <>
         {results.map(result =>
-          <Box>
-            <Text>{result.seriesName} </Text>
+          <Box margin="10px" bg="tomato">
+            <Flex>
+              <Image src={result.image} height="150px" width="auto" />
+              <Flex direction="column">
+                <Text>{result.seriesName} </Text>
+                <Text>{result.network} </Text>
+                <Text>{result.overview} </Text>
+              </Flex>
+            </Flex>
           </Box>
         )}
       </>
-      :
-      <p>No shows found</p>
       }
 
     </Container>
