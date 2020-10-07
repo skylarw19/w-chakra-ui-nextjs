@@ -47,7 +47,7 @@ const Index = () => {
       :
       <>
         {results.map(result =>
-          <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px">
+          <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px" w="95%">
             <Flex>
                  <Image d="flex" src={result.image} h="150px" w="auto" m="5px" />
                  <Box>
