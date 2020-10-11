@@ -30,21 +30,21 @@ const Index = () => {
 
   return(
     <Container>
-      <form onSubmit={handleSubmit} >
-        <Flex m="10px">
-          <Input m="10px"
-            value={inputText}
-            onChange={handleChange}
-            placeholder="search for a show"
-          />
-          { inputText === null || inputText.match(/^ *$/) ? 
-            <></> 
-          : 
-            <Button type="submit" variantColor="teal" m="10px">Search</Button>
-          }
-        </Flex>
-      </form>
-
+      
+      <Flex m="10px">
+        <Input 
+          m="10px"
+          value={inputText}
+          onChange={handleChange}
+          placeholder="search for a show"
+        />
+        { inputText === null || inputText.match(/^ *$/) ? 
+          <></> 
+        : 
+          <Button onClick={handleSubmit} variantColor="teal" m="10px">Search</Button>
+        }
+      </Flex>
+      
       {hasSearched && !results.length ?
         <Text>No shows found</Text>
       :
