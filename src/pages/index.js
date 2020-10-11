@@ -1,11 +1,8 @@
 import {
   Input,
   Button,
-  Box,
   Text,
-  Image,
   Flex,
-  Badge
 } from '@chakra-ui/core'
 
 import React, {useState} from 'react'
