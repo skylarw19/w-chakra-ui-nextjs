@@ -3,6 +3,7 @@ export default async (req,res) => {
     const data = await results.json()  
     const shows = data.showsWithServicePlans.map(el =>{
             return{    
+                id: el.id,
                 seriesName: el.seriesName,
                 overview: el.overview,
                 image: el.image,

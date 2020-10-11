@@ -30,21 +30,34 @@ const Index = () => {
 
   return(
     <Container>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <Flex m="10px">
           <Input m="10px"
             value={inputText}
             onChange={handleChange}
             placeholder="search for a show"
           />
-          <Button type="submit" variantColor="teal" m="10px">Search</Button>
+          { inputText === null || inputText.match(/^ *$/) ? 
+            <></> 
+          : 
+            <Button type="submit" variantColor="teal" m="10px">Search</Button>
+          }
         </Flex>
       </form>
 
       {hasSearched && !results.length ?
         <Text>No shows found</Text>
       :
-        <ShowCard results={results} />      
+        results.map(result => 
+          <ShowCard
+            key={result.id}
+            seriesName={result.seriesName}
+            overview={result.overview}
+            image={result.image}
+            network={result.network}
+            servicePlans={result.servicePlans}  
+          />      
+        )
       }
 
     </Container>
