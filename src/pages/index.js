@@ -10,14 +10,14 @@ import {
 
 import React, {useState} from 'react'
 import { Container } from '../components/Container'
+import ShowCard from '../components/ShowCard'
 
 const Index = () => {
   
   const [inputText, setInputText] = useState("")
   const [results, setResults] = useState([])
-  const [search, setSearch] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false)
 
-  //handle form functions
   const handleChange = e => {setInputText(e.target.value)}
 
   const handleSubmit = async (e) => {
@@ -25,8 +25,7 @@ const Index = () => {
     const apiResult = await fetch(`/api/search?q=${inputText}`)
     const data = await apiResult.json();
     setResults(data.shows);
-    setSearch(true)
-    console.log(data.shows)
+    setHasSearched(true);
   }  
 
   return(
@@ -42,46 +41,10 @@ const Index = () => {
         </Flex>
       </form>
 
-      {search && !results.length ?
+      {hasSearched && !results.length ?
         <Text>No shows found</Text>
       :
-      <>
-        {results.map(result =>
-          <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px" w="95%">
-            <Flex>
-                 <Image d="flex" src={result.image} h="150px" w="auto" m="5px" />
-                 <Box>
-                   <Flex>
-                    <Text m="1" >{result.seriesName} </Text>
-                    <Badge 
-                      rounded="full" 
-                      variantColor="teal" 
-                      textTransform="uppercase"
-                      m="1"
-                      p="1"
-                    >
-                      {result.network} 
-                    </Badge>
-                   </Flex>
-                  <Text m="1">{result.overview}</Text>
-                  <Flex wrap="wrap">
-                    {result.servicePlans.map(servicePlan =>
-                      <Badge 
-                        rounded="full" 
-                        variantColor="teal" 
-                        textTransform="uppercase"
-                        m="1"
-                        p="1"
-                      > 
-                        {servicePlan.name} 
-                      </Badge>  
-                    )}
-                  </Flex>
-                 </Box>
-            </Flex>
-          </Box>
-        )}
-      </>
+        <ShowCard results={results} />      
       }
 
     </Container>
@@ -91,38 +54,4 @@ const Index = () => {
 export default Index
 
 
-
-
-    {/* <Hero />
-    <Main>
-      
-      <Text>
-        Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code>.
-      </Text>
-
-      <List spacing={3} my={0}>
-        <ListItem>
-          <ListIcon icon="check-circle" color="green.500" />
-          <ChakraLink
-            isExternal
-            href="https://chakra-ui.com"
-            flexGrow={1}
-            mr={2}
-          >
-            Chakra UI <Icon name="external-link" mx="2px" />
-          </ChakraLink>
-        </ListItem>
-        <ListItem>
-          <ListIcon icon="check-circle" color="green.500" />
-          <ChakraLink isExternal href="https://nextjs.org" flexGrow={1} mr={2}>
-            Next.js <Icon name="external-link" mx="2px" />
-          </ChakraLink>
-        </ListItem>
-      </List>
-    </Main>
-
-    <DarkModeSwitch />
-    <Footer>
-      <Text>Next ❤️ Chakra</Text>
-    </Footer>
-    <CTA /> */}
+   
