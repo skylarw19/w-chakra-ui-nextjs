@@ -1,3 +1,5 @@
+// import SearchesMade from '../../../models/searchesMade'
+
 export default async (req,res) => {
     const results = await fetch(`${process.env.apiurl}/${req.query.q}`)
     const data = await results.json()  
@@ -11,6 +13,8 @@ export default async (req,res) => {
                 servicePlans: el.servicePlans  
             }
     })
+
+    // const searchItem = await SearchesMade.create(req.query.q)
     return res.json({shows})
 }
 
