@@ -8,9 +8,6 @@ import {
 import React, {useState} from 'react'
 import { Container } from '../components/Container'
 import ShowCard from '../components/ShowCard'
-import searchCtrl from '../../controllers/search'
-
-
 
 const Index = () => {
   
@@ -26,7 +23,6 @@ const Index = () => {
     const data = await apiResult.json();
     setResults(data.shows);
     setHasSearched(true);
-    const searchItem = await searchCtrl.addToSearchesMade(inputText)
   }  
 
   return(

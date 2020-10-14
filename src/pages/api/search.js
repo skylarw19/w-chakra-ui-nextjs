@@ -1,4 +1,5 @@
-// import SearchesMade from '../../../models/searchesMade'
+import SearchesMade from '../../../models/searchesMade'
+import '../../../config/database'   //import the connection to mongoDB
 
 export default async (req,res) => {
     const results = await fetch(`${process.env.apiurl}/${req.query.q}`)
@@ -14,7 +15,7 @@ export default async (req,res) => {
             }
     })
 
-    // const searchItem = await SearchesMade.create(req.query.q)
+    const searchItem = await SearchesMade.create({seriesName: req.query.q})
     return res.json({shows})
 }
 
