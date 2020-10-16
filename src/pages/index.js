@@ -8,6 +8,7 @@ import {
 import React, {useState} from 'react'
 import { Container } from '../components/Container'
 import ShowCard from '../components/ShowCard'
+import Link from 'next/link'
 
 const Index = () => {
   
@@ -41,6 +42,11 @@ const Index = () => {
           <Button onClick={handleSubmit} variantColor="teal" m="10px">Search</Button>
         }
       </Flex>
+
+      <Button variantColor="yellow">
+        <Link href="/searches/"><a>See Search History</a></Link>
+      </Button>
+      
       
       {hasSearched && !results.length ?
         <Text>No shows found</Text>
