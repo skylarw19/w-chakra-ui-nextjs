@@ -13,22 +13,25 @@ import Link from 'next/link'
 export default function SearchHistoryIndex(props) {
     return (  
         <Container>
-            <p> hello past search index pg</p>
-            <Button varianColor="yellow"> 
+            <Text>Your Previous Search History</Text>
+            <Button variantColor="yellow"> 
                 <Link href="/"><a>Back to Home</a></Link>
             </Button>
-            {props.searchHistory.map(el =>
-                <p>{el.seriesName}</p>
-                )}
+            {props.searchHistory.map(pastSearchItem => (
+                <Link
+                    href={`/searches/${pastSearchItem._id}`}
+                    ><a>{pastSearchItem.seriesName}</a>
+                </Link>
+            ))}
         </Container>
     );
 }
 
 export async function getStaticProps(){
     //get external data from db
-    const data = await fetch('http://localhost:3000/api/searchHistory') 
+    const data = await fetch('http://localhost:3000/api/searchHistory') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
     const searchHistory = await data.json()
-    console.log(searchHistory)
+
     //the value of the 'props' key will be passed to the SearchHistoryIndex component
     return {
         props: searchHistory
