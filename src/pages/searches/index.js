@@ -9,7 +9,6 @@ import {
 import React, {useState} from 'react'
 import { Container } from '../../components/Container'
 import Link from 'next/link'
-import SearchesMade from '../../../models/searchesMade'
 
 export default function SearchHistoryIndex(props) {
     return (  
@@ -27,7 +26,8 @@ export default function SearchHistoryIndex(props) {
 
 export async function getStaticProps(){
     //get external data from db
-    const searchHistory = await fetch('/api/searchHistory') 
+    const data = await fetch('http://localhost:3000/api/searchHistory') 
+    const searchHistory = await data.json()
     console.log(searchHistory)
     //the value of the 'props' key will be passed to the SearchHistoryIndex component
     return {
