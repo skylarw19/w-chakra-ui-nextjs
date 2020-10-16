@@ -19,7 +19,7 @@ export default function SearchHistoryIndex(props) {
             </Button>
             {props.searchHistory.map(pastSearchItem => (
                 <Link
-                    href={`/searches/${pastSearchItem._id}`}
+                    href={`/searchHistory/${pastSearchItem._id}`}
                     ><a>{pastSearchItem.seriesName}</a>
                 </Link>
             ))}

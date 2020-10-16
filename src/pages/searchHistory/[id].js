@@ -12,7 +12,14 @@ const PastSearchItem = (props) => {
     return (  
         <Container>
             <p>hello</p>
-            
+            <Flex>
+                <Button variantColor="yellow"> 
+                    <Link href="/"><a>Back to Home</a></Link>
+                </Button>
+                <Button variantColor="blue"> 
+                    <Link href="/searchHistory/"><a>Back to Search History</a></Link>
+                </Button>
+            </Flex>
         </Container>
     );
 }

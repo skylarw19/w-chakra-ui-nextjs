@@ -44,7 +44,7 @@ const Index = () => {
       </Flex>
 
       <Button variantColor="yellow">
-        <Link href="/searches/"><a>See Search History</a></Link>
+        <Link href="/searchHistory/"><a>See Search History</a></Link>
       </Button>
       
       
