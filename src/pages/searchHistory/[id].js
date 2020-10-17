@@ -24,6 +24,7 @@ export default function PastSearchItem({item}) {
             <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px" w="95%" textAlign="center">
                 <Text>You searched for "{item.seriesName}"</Text>
                 <Text>Search Time: {item.createdAt}</Text>
+                <Text>Search ID: {item._id}</Text>
             </Box>
         </Container>
     );
