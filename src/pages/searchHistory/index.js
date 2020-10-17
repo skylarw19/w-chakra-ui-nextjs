@@ -15,7 +15,7 @@ export default function SearchHistoryIndex(props) {
         <Container>
             <Text>Your Previous Search History</Text>
             <Button variantColor="yellow"> 
-                <Link href="/"><a>Back to Home</a></Link>
+                <Link href="/"><a>Home</a></Link>
             </Button>
             {props.searchHistory.map(pastSearchItem => (
                 <Link

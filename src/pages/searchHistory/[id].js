@@ -15,10 +15,10 @@ export default function PastSearchItem({item}) {
             
             <Flex>
                 <Button variantColor="yellow"> 
-                    <Link href="/"><a>Back to Home</a></Link>
+                    <Link href="/"><a>Home</a></Link>
                 </Button>
                 <Button variantColor="blue"> 
-                    <Link href="/searchHistory/"><a>Back to Search History</a></Link>
+                    <Link href="/searchHistory/"><a>Search History</a></Link>
                 </Button>
             </Flex>
             <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px" w="95%" textAlign="center">
