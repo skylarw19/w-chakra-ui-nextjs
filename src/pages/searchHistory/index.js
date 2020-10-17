@@ -31,8 +31,6 @@ export async function getStaticProps(){
     //get external data from db
     const data = await fetch('http://localhost:3000/api/searchHistory') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
     const searchHistory = await data.json()
-    console.log('searchhist')
-    console.log(searchHistory)
     //the value of the 'props' key will be passed to the SearchHistoryIndex component
     return {
         props: searchHistory

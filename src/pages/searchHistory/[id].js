@@ -2,6 +2,7 @@ import {
     Button,
     Text,
     Flex,
+    Box,
   } from '@chakra-ui/core'
   
 import React, {useState} from 'react'
@@ -20,8 +21,10 @@ export default function PastSearchItem({item}) {
                     <Link href="/searchHistory/"><a>Back to Search History</a></Link>
                 </Button>
             </Flex>
-            <Text>You searched for "{item.seriesName}"</Text>
-            <Text>Search Time: {item.createdAt}</Text>
+            <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px" w="95%" textAlign="center">
+                <Text>You searched for "{item.seriesName}"</Text>
+                <Text>Search Time: {item.createdAt}</Text>
+            </Box>
         </Container>
     );
 }
