@@ -18,7 +18,7 @@ export default function PastSearchItem({item}) {
                     <Link href="/"><a>Home</a></Link>
                 </Button>
                 <Button variantColor="blue"> 
-                    <Link href="/searchHistory/"><a>Search History</a></Link>
+                    <Link href="/search-history/"><a>Search History</a></Link>
                 </Button>
             </Flex>
             <Box border="1px" borderColor="gray.700" bg="gray.100" rounded="lg" m="10px" w="95%" textAlign="center">
@@ -33,7 +33,7 @@ export default function PastSearchItem({item}) {
 // getStaticPaths should return an array of possible values for id
 export async function getStaticPaths() {   
     //get external data from db
-    const data = await fetch('http://localhost:3000/api/searchHistory') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
+    const data = await fetch('http://localhost:3000/api/search-history') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
     const dataObj = await data.json()
 
     // the arr of possible values for 'id' must be the value for the 'paths' key of the returned obj
@@ -61,7 +61,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({params}) {
     // fetches necessary data for the show using params.id - use 'id' b/c file name is [id].js
     //get external data from db
-    const data = await fetch(`http://localhost:3000/api/searchHistory`) //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
+    const data = await fetch(`http://localhost:3000/api/search-history`) //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
     const dataObj = await data.json()
     const item = dataObj.searchHistory.find(el => el._id === params.id)
 
