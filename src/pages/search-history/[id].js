@@ -31,6 +31,12 @@ export default function PastSearchItem({item}) {
 }
 
 export async function getServerSideProps() {
+    const data = await fetch(`http://localhost:3000/api/search-history/${id}`)
+    const item = await data.json()
+
+    return {
+        props: item
+    }
     // // fetches necessary data for the show using params.id - use 'id' b/c file name is [id].js
     // //get external data from db
     // const data = await fetch(`http://localhost:3000/api/search-history/`) //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
@@ -41,12 +47,6 @@ export async function getServerSideProps() {
     // return {
     //     props: {item}
     // }
-    const data = await fetch(`http://localhost:3000/api/search-history/${id}`)
-    const item = await data.json()
-
-    return {
-        props: item
-    }
 
 }
 
