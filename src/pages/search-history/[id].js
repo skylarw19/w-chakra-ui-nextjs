@@ -30,7 +30,12 @@ export default function PastSearchItem({item}) {
     );
 }
 
-export async function getServerSideProps() {
+// getServerSideProps = ({ params }) => {
+//     const { id } = params;
+//    }
+
+export async function getServerSideProps({params}) {
+    const {id} = params;
     const data = await fetch(`http://localhost:3000/api/search-history/${id}`)
     const item = await data.json()
 
