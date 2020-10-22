@@ -30,43 +30,50 @@ export default function PastSearchItem({item}) {
     );
 }
 
-// getStaticPaths should return an array of possible values for id
-export async function getStaticPaths() {   
-    //get external data from db
-    const data = await fetch('http://localhost:3000/api/search-history') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
-    const dataObj = await data.json()
+export async function getServerSideProps() {
+    // // fetches necessary data for the show using params.id - use 'id' b/c file name is [id].js
+    // //get external data from db
+    // const data = await fetch(`http://localhost:3000/api/search-history/`) //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
+    // const dataObj = await data.json()
+    // const item = dataObj.searchHistory.find(el => el._id === params.id)
 
-    // the arr of possible values for 'id' must be the value for the 'paths' key of the returned obj
-    // returns an array that looks like
-    // [
-    //     { params: { id: '5f874ecc60dbee90d7028831' } },
-    //     { params: { id: '5f8911616167dcba92db090c' } },
-    //   ]
-    const paths = dataObj.searchHistory.map(historyItem => {
-        return {
-            params: {
-                id: historyItem._id
-            }
-        }
-    })
-    
-    //array of possible paths returned. the params are basically passed to getStaticProps
+    // //the value of the 'props' key will be passed to the PastSearchItem component
+    // return {
+    //     props: {item}
+    // }
+    const data = await fetch(`http://localhost:3000/api/search-history/${id}`)
+    const item = await data.json()
+
     return {
-        paths,
-        fallback: false
+        props: item
     }
-    
+
 }
 
-export async function getStaticProps({params}) {
-    // fetches necessary data for the show using params.id - use 'id' b/c file name is [id].js
-    //get external data from db
-    const data = await fetch(`http://localhost:3000/api/search-history`) //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
-    const dataObj = await data.json()
-    const item = dataObj.searchHistory.find(el => el._id === params.id)
+// // getStaticPaths should return an array of possible values for id
+// export async function getStaticPaths() {   
+//     //get external data from db
+//     const data = await fetch('http://localhost:3000/api/search-history') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
+//     const dataObj = await data.json()
 
-    //the value of the 'props' key will be passed to the PastSearchItem component
-    return {
-        props: {item}
-    }
-}
+//     // the arr of possible values for 'id' must be the value for the 'paths' key of the returned obj
+//     // returns an array that looks like
+//     // [
+//     //     { params: { id: '5f874ecc60dbee90d7028831' } },
+//     //     { params: { id: '5f8911616167dcba92db090c' } },
+//     //   ]
+//     const paths = dataObj.searchHistory.map(historyItem => {
+//         return {
+//             params: {
+//                 id: historyItem._id
+//             }
+//         }
+//     })
+    
+//     //array of possible paths returned. the params are basically passed to getStaticProps
+//     return {
+//         paths,
+//         fallback: false
+//     }
+    
+// }

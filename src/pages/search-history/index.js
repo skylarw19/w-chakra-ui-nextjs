@@ -19,6 +19,7 @@ export default function SearchHistoryIndex(props) {
             </Button>
             {props.searchHistory.map(pastSearchItem => (
                 <Link
+                    key={pastSearchItem._id}
                     href={`/search-history/${pastSearchItem._id}`}
                     ><a>{pastSearchItem.seriesName}</a>
                 </Link>
@@ -27,9 +28,9 @@ export default function SearchHistoryIndex(props) {
     );
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
     //get external data from db
-    const data = await fetch('http://localhost:3000/api/search-history') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
+    const data = await fetch('http://localhost:3000/api/search-history/') //had to do absolute url instead of /api/searchHistory - otherwise error of "Only Absolute URLs are supported"
     const searchHistory = await data.json()
     //the value of the 'props' key will be passed to the SearchHistoryIndex component
     return {
